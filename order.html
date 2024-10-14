@@ -112,13 +112,13 @@
      
       </footer>
 
-    <script>
+      <script>
         // Отримати товари з LocalStorage та відобразити їх у замовленні
         function displayOrderItems() {
             let cartItems = JSON.parse(localStorage.getItem('cartItems')) || [];
             let orderContainer = document.getElementById('order-items');
             let totalPrice = 0;
-
+    
             if (cartItems.length === 0) {
                 orderContainer.innerHTML = '<p>Ваш кошик порожній.</p>';
             } else {
@@ -129,26 +129,26 @@
                         <p>${item.name} - ${item.price} грн, кількість: ${item.quantity}</p>
                     `;
                     orderContainer.appendChild(itemElement);
-
+    
                     totalPrice += item.price * item.quantity;
                 });
             }
-
+    
             // Показати загальну суму
             document.getElementById('total-price').innerText = totalPrice;
         }
-
+    
         // Обробка форми оформлення замовлення
         document.getElementById('checkout-form').addEventListener('submit', function(event) {
             event.preventDefault(); // Запобігаємо перезавантаженню сторінки
-
+    
             let name = document.getElementById('name').value;
             let phone = document.getElementById('phone').value;
             let address = document.getElementById('address').value;
-
+    
             // Отримуємо товари з кошика
             let cartItems = JSON.parse(localStorage.getItem('cartItems')) || [];
-
+    
             // Створюємо об'єкт замовлення
             let order = {
                 customerName: name,
@@ -157,19 +157,20 @@
                 items: cartItems,
                 totalAmount: document.getElementById('total-price').innerText
             };
-
+    
             // Зберегти замовлення (можна надіслати на сервер або зберегти локально)
             console.log('Замовлення:', order);
             alert('Замовлення оформлено! Дякуємо за покупку.');
-
+    
             // Очищаємо кошик після оформлення замовлення
             localStorage.removeItem('cartItems');
-            window.location.href = 'confirmation.html'; // Перенаправляємо на сторінку підтвердження
+            window.location.href = 'index.html'; // Перенаправляємо на головну сторінку
         });
-
+    
         // Виклик функції при завантаженні сторінки
         window.onload = displayOrderItems;
     </script>
+    
     <script src="js/window.js"></script>
 </body>
 </html>
